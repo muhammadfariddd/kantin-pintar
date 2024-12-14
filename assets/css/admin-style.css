@@ -1,0 +1,621 @@
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+.admin-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar Style */
+.sidebar {
+  width: 250px;
+  background: #4169e1;
+  color: white;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  transition: all 0.3s ease;
+  z-index: 1020;
+}
+
+.sidebar.collapsed {
+  margin-left: -250px;
+}
+
+.main-content {
+  margin-left: 250px;
+  transition: all 0.3s ease;
+}
+
+.main-content.expanded {
+  margin-left: 0;
+}
+
+.sidebar-header {
+  padding: 20px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-menu {
+  padding: 0;
+  list-style: none;
+  margin: 0;
+}
+
+.sidebar-menu li a {
+  padding: 0.75rem 1.5rem;
+  display: block;
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s;
+  position: relative;
+  border-left: 4px solid transparent;
+}
+
+.sidebar-menu li a:hover,
+.sidebar-menu li a.active {
+  background: rgba(255, 255, 255, 0.1);
+  border-left-color: #ffffff;
+}
+
+.sidebar-menu li a i {
+  margin-right: 10px;
+  width: 20px;
+  text-align: center;
+}
+
+/* Active state highlight */
+.sidebar-menu li a.active {
+  background: rgba(255, 255, 255, 0.15);
+  font-weight: 500;
+}
+
+.sidebar-menu li a.active::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 70%;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 2px 0 0 2px;
+}
+
+/* Top Navbar */
+.top-navbar {
+  background: white;
+  padding: 0.5rem;
+  display: flex;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #dee2e6;
+  margin-bottom: 20px;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navbar-right .user-menu {
+  position: relative;
+}
+
+.navbar-right .dropdown-toggle {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  color: #333;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  z-index: 1033;
+}
+
+.navbar-right .dropdown-toggle:hover,
+.navbar-right .dropdown-item:hover {
+  background: rgba(65, 105, 225, 0.1);
+}
+
+.navbar-right .dropdown-menu {
+  position: absolute !important;
+  right: 0;
+  left: auto !important;
+  margin-top: 0.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1032;
+}
+
+/* Update style dropdown */
+.navbar-right .dropdown-toggle:focus,
+.navbar-right .dropdown-toggle:active {
+  border: none !important;
+}
+
+.navbar-right .dropdown-toggle.show {
+  background: rgba(65, 105, 225, 0.1);
+}
+
+.navbar-right .dropdown-item i {
+  width: 20px;
+  text-align: center;
+  color: #4169e1;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  margin-left: 250px;
+  padding: 20px;
+  min-height: calc(100vh - 60px);
+}
+
+/* Admin Footer */
+.admin-footer {
+  background: white;
+  padding: 1rem 0;
+  border-top: 1px solid #dee2e6;
+  transition: margin-left 0.3s ease;
+  text-align: center;
+  width: 100%;
+}
+
+.admin-footer.expanded {
+  margin-left: 0 !important;
+}
+
+.admin-footer .container {
+  max-width: 100%;
+  padding: 0 20px;
+}
+
+/* Settings Card */
+.settings-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: none;
+}
+
+.settings-card .card-header {
+  background: white;
+  border-bottom: 1px solid #eee;
+  padding: 1.25rem;
+}
+
+.settings-card .card-header h4 {
+  margin: 0;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.settings-card .card-body {
+  padding: 1.5rem;
+}
+
+.settings-card .form-label {
+  font-weight: 500;
+  color: #34495e;
+}
+
+.settings-card .form-control {
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+  padding: 0.75rem 1rem;
+}
+
+.settings-card .form-control:focus {
+  border-color: #4169e1;
+  box-shadow: 0 0 0 0.2rem rgba(65, 105, 225, 0.25);
+}
+
+/* Table Styles */
+.table {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.table th {
+  background: #4169e1;
+  color: white;
+  font-weight: 500;
+  text-align: center;
+  vertical-align: middle;
+  padding: 1rem;
+}
+
+.table td {
+  vertical-align: middle;
+  text-align: center;
+  padding: 1rem;
+}
+
+.table td img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.table .btn-action {
+  padding: 0.5rem;
+  margin: 0 0.25rem;
+  border-radius: 6px;
+}
+
+.table .btn-edit {
+  background: #00b894;
+  color: white;
+}
+
+.table .btn-delete {
+  background: #d63031;
+  color: white;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  /* .sidebar {
+    margin-left: -250px;
+  }
+
+  .sidebar.active {
+    margin-left: 0;
+  } */
+
+  .main-content,
+  .admin-footer {
+    margin-left: 0;
+  }
+}
+
+/* Alert Styles */
+.alert {
+  position: relative;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.375rem;
+}
+
+.alert-dismissible {
+  padding-right: 3rem;
+}
+
+.alert-dismissible .btn-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  padding: 1rem;
+  background: none;
+  border: 0;
+  width: auto;
+  height: auto;
+}
+
+.alert-dismissible .btn-close::before {
+  content: "×";
+  font-size: 1.5rem;
+  line-height: 1;
+  color: inherit;
+  opacity: 0.5;
+}
+
+.btn-close:hover {
+  opacity: 1;
+}
+
+.alert-success {
+  color: #0f5132;
+  background-color: #d1e7dd;
+  border-color: #badbcc;
+}
+
+.alert-danger {
+  color: #842029;
+  background-color: #f8d7da;
+  border-color: #f5c2c7;
+}
+
+/* Update style untuk tombol toggle */
+.btn-toggle-sidebar {
+  font-size: 1.25rem;
+  padding: 0.5rem 0.75rem;
+  color: #4169e1;
+  background: transparent;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-toggle-sidebar:hover {
+  background: rgba(65, 105, 225, 0.1);
+  color: #2850c8;
+}
+
+/* Stat Cards */
+.stat-card {
+  border: none;
+  border-radius: 10px;
+  transition: transform 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+}
+
+.stat-card .card-body {
+  padding: 1.5rem;
+}
+
+.stat-card .fa-2x {
+  font-size: 2rem;
+}
+
+.stat-card .opacity-50 {
+  opacity: 0.5;
+}
+
+/* Active Menu Item */
+.sidebar-menu li a.active {
+  background: rgba(255, 255, 255, 0.2);
+  border-left: 4px solid white;
+  padding-left: 16px; /* 20px - 4px border */
+}
+
+.sidebar-menu li a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-left: 4px solid rgba(255, 255, 255, 0.5);
+  padding-left: 16px;
+}
+
+/* Responsive Dashboard Cards */
+@media (max-width: 992px) {
+  .stat-card {
+    margin-bottom: 1rem;
+  }
+
+  .stat-card h3 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    margin-left: -250px;
+    z-index: 1040;
+  }
+
+  .sidebar.active {
+    margin-left: 0;
+  }
+
+  .main-content {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .top-navbar {
+    padding: 0.5rem;
+  }
+
+  .navbar-right .dropdown-toggle span {
+    display: none;
+  }
+
+  .card-body {
+    padding: 1rem;
+  }
+
+  .table td,
+  .table th {
+    padding: 0.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .stat-card .card-body {
+    padding: 1rem;
+  }
+
+  .stat-card h6 {
+    font-size: 0.9rem;
+  }
+
+  .stat-card h3 {
+    font-size: 1.25rem;
+  }
+
+  .stat-card .fa-2x {
+    font-size: 1.5rem;
+  }
+
+  .container {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
+
+/* Overlay untuk mobile sidebar */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1039;
+}
+
+@media (max-width: 768px) {
+  .sidebar.active + .sidebar-overlay {
+    display: block;
+  }
+}
+
+/* Update bagian responsive di kedua file CSS */
+@media (max-width: 991px) {
+  .sidebar {
+    position: fixed;
+    left: -250px;
+    top: 0;
+    height: 100vh;
+    width: 250px;
+    z-index: 1040;
+    transition: all 0.3s ease;
+  }
+
+  .sidebar.active {
+    left: 0;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .main-content {
+    margin-left: 0 !important;
+    width: 100%;
+  }
+
+  .sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1039;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .sidebar.active + .sidebar-overlay {
+    display: block;
+    opacity: 1;
+  }
+}
+
+/* Style untuk layar besar */
+@media (min-width: 992px) {
+  .sidebar {
+    width: 250px;
+    transition: all 0.3s ease;
+  }
+
+  .sidebar.collapsed {
+    margin-left: -250px;
+  }
+
+  .main-content {
+    margin-left: 250px;
+    transition: all 0.3s ease;
+  }
+
+  .main-content.expanded {
+    margin-left: 0;
+  }
+}
+
+/* Order Management Styles */
+.order-table {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.order-table th {
+  background: #4169e1;
+  color: white;
+  font-weight: 500;
+  padding: 1rem;
+}
+
+.status-select {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #dee2e6;
+  font-size: 0.9rem;
+}
+
+.status-select option[value="Diproses"] {
+  background-color: #ffc107;
+  color: #000;
+}
+
+.status-select option[value="Siap"] {
+  background-color: #28a745;
+  color: white;
+}
+
+.status-select option[value="Diambil"] {
+  background-color: #007bff;
+  color: white;
+}
+
+.order-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.order-actions .btn {
+  padding: 0.375rem 0.75rem;
+  border-radius: 6px;
+}
+
+.order-filter {
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.order-filter .btn-group .btn {
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+}
+
+.order-filter .btn-group .btn.active {
+  background: #4169e1;
+  color: white;
+}
+
+/* Responsive styles */
+@media (max-width: 992px) {
+  .order-table {
+    font-size: 0.9rem;
+  }
+
+  .status-select {
+    width: 120px;
+  }
+}
+
+@media (max-width: 768px) {
+  .order-actions {
+    flex-direction: column;
+  }
+
+  .order-filter .btn-group {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+}

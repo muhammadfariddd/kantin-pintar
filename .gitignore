@@ -1,0 +1,42 @@
+# Dependencies
+/node_modules
+/vendor
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Config files with sensitive data
+/config/database.php
+
+# IDE specific files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Uploaded files
+/assets/img/menu/*
+!/assets/img/menu/.gitkeep
+/assets/img/users/*
+!/assets/img/users/.gitkeep
+
+# Logs
+/logs
+*.log
+
+# Cache files
+*.cache
+
+# Database dumps
+*.sql
