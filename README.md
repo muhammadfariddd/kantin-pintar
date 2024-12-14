@@ -1,7 +1,5 @@
 # 🍽️ Kantin Pintar
 
-![Kantin Pintar Banner](path/to/banner.png)
-
 Kantin Pintar adalah sistem manajemen kantin modern yang memudahkan mahasiswa untuk memesan makanan dan minuman di kampus. Dengan antarmuka yang intuitif dan fitur yang lengkap, Kantin Pintar membuat pengalaman memesan makanan menjadi lebih efisien dan menyenangkan.
 
 ## ✨ Fitur Utama
@@ -66,14 +64,10 @@ http://localhost:8080
 
 Kami sangat menghargai setiap kontribusi yang diberikan. Jika Anda ingin berkontribusi, silakan buka issue atau pull request.
 
-## 📝 Lisensi
-
-Kantin Pintar dilisensikan di bawah [MIT License](LICENSE).
-
 ## 📞 Kontak
 
 Jika Anda memiliki pertanyaan atau memerlukan bantuan, silakan hubungi kami di [ilhamfaridjepara@gmail.com](mailto:ilhamfaridjepara@gmail.com).
 
 ---
 
-Terima kasih telah menggunakan Kantin Pintar!
+Terima kasih telah menggunakan Kantin Pintar 😊!
