@@ -7,10 +7,11 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-// Ambil data keranjang
-$cart_items = [];
+// Ambil data keranjang dari session
+$cart = [];
 $total = 0;
 
+// Ambil detail menu untuk setiap item di keranjang
 if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
     foreach ($_SESSION['cart'] as $menuId => $quantity) {
         $stmt = $conn->prepare("SELECT * FROM menu WHERE id = ?");
@@ -19,8 +20,9 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
 
         if ($menu) {
             $subtotal = $menu['harga'] * $quantity;
-            $cart_items[] = [
-                'id' => $menu['id'],
+            $cart[] = [
+                'id' => $menuId,  // Gunakan menu id sebagai id item
+                'menu_id' => $menu['id'],
                 'nama' => $menu['nama'],
                 'harga' => $menu['harga'],
                 'quantity' => $quantity,
@@ -37,7 +39,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
 <div class="container mt-4">
     <h2>Keranjang Belanja</h2>
 
-    <?php if (empty($cart_items)): ?>
+    <?php if (empty($cart)): ?>
         <div class="alert alert-info">
             Keranjang belanja kosong.
             <a href="/menu/index.php" class="alert-link">Kembali ke Menu</a>
@@ -59,7 +61,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($cart_items as $item): ?>
+                                    <?php foreach ($cart as $item): ?>
                                         <tr>
                                             <td><?= htmlspecialchars($item['nama']) ?></td>
                                             <td>Rp <?= number_format($item['harga'], 0, ',', '.') ?></td>
@@ -79,6 +81,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                                             <td>
                                                 <button class="btn btn-danger btn-sm"
                                                     onclick="removeItem(<?= $item['id'] ?>)">
+                                                    <i class="fas fa-trash me-1"></i>
                                                     Hapus
                                                 </button>
                                             </td>
@@ -113,6 +116,28 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
 </div>
 
 <script>
+    function removeItem(menuId) {
+        if (confirm('Apakah Anda yakin ingin menghapus item ini?')) {
+            fetch('/orders/remove_item.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        menu_id: menuId
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        window.location.reload();
+                    } else {
+                        alert(data.message || 'Gagal menghapus item');
+                    }
+                });
+        }
+    }
+
     function updateQuantity(menuId, action, value = null) {
         let url = '/orders/update_cart.php';
         let data = {
@@ -139,28 +164,6 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                     alert(data.message);
                 }
             });
-    }
-
-    function removeItem(menuId) {
-        if (confirm('Apakah Anda yakin ingin menghapus item ini?')) {
-            fetch('/orders/remove_item.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        menu_id: menuId
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        location.reload();
-                    } else {
-                        alert(data.message);
-                    }
-                });
-        }
     }
 </script>
 

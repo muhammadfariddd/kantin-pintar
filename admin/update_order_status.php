@@ -35,13 +35,13 @@ if (isset($data['order_id']) && isset($data['status'])) {
             $order = $stmt->fetch();
 
             if ($order) {
-                // Buat notifikasi
+                // Buat notifikasi sesuai struktur tabel yang ada
                 $pesan = "Pesanan #" . $data['order_id'] . " Anda sudah siap untuk diambil!";
                 $stmt = $conn->prepare("
-                    INSERT INTO notifications (user_id, order_id, pesan, status) 
-                    VALUES (?, ?, ?, 0)
+                    INSERT INTO notifications (user_id, pesan, status) 
+                    VALUES (?, ?, 0)
                 ");
-                $stmt->execute([$order['user_id'], $data['order_id'], $pesan]);
+                $stmt->execute([$order['user_id'], $pesan]);
             }
         }
 

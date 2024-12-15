@@ -888,3 +888,42 @@ body {
 .parallax-floating {
   animation: float 6s ease-in-out infinite;
 }
+
+/* Notification Styles */
+.notification-menu {
+  width: 320px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.notification-header {
+  border-bottom: 1px solid #eee;
+}
+
+.notification-item {
+  padding: 0.75rem;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.notification-item:hover {
+  background: rgba(65, 105, 225, 0.05);
+}
+
+.notification-item.unread {
+  background: rgba(65, 105, 225, 0.1);
+}
+
+.notification-item:last-child {
+  border-bottom: none;
+}
+
+.notification-item .btn {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.notification-item:hover .btn {
+  opacity: 1;
+}

@@ -125,3 +125,107 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     });
   });
 });
+
+// Fungsi untuk menandai notifikasi sudah dibaca
+function markNotificationRead(notifId) {
+  fetch("/api/mark_notification_read.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ notification_id: notifId }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        const notifElement = document.querySelector(
+          `[data-notif-id="${notifId}"]`
+        );
+        if (notifElement) {
+          notifElement.classList.remove("unread");
+          updateNotificationBadge();
+        }
+      }
+    });
+}
+
+// Fungsi untuk menghapus notifikasi
+function deleteNotification(notifId, event) {
+  event.stopPropagation();
+  if (confirm("Hapus notifikasi ini?")) {
+    fetch("/api/delete_notification.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ notification_id: notifId }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          const notifElement = document.querySelector(
+            `[data-notif-id="${notifId}"]`
+          );
+          if (notifElement) {
+            notifElement.remove();
+            updateNotificationBadge();
+          }
+        }
+      });
+  }
+}
+
+// Fungsi untuk melihat detail pesanan dari notifikasi
+function viewOrderFromNotif(orderId, notifId) {
+  markNotificationRead(notifId);
+  window.location.href = `/orders/history.php?order_id=${orderId}`;
+}
+
+// Fungsi untuk menandai semua notifikasi sudah dibaca
+function markAllAsRead() {
+  fetch("/api/mark_all_read.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        // Hapus class unread dari semua notifikasi
+        document
+          .querySelectorAll(".notification-item.unread")
+          .forEach((item) => item.classList.remove("unread"));
+
+        // Hapus badge notifikasi
+        const badge = document.querySelector("#notificationsDropdown .badge");
+        if (badge) {
+          badge.remove();
+        }
+      } else {
+        alert(data.message || "Gagal menandai notifikasi sebagai sudah dibaca");
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      alert("Terjadi kesalahan saat memproses permintaan");
+    });
+}
+
+// Update badge notifikasi
+function updateNotificationBadge() {
+  const unreadCount = document.querySelectorAll(
+    ".notification-item.unread"
+  ).length;
+  const badge = document.querySelector("#notificationsDropdown .badge");
+
+  if (unreadCount > 0) {
+    if (badge) {
+      badge.textContent = unreadCount;
+    } else {
+      const newBadge = document.createElement("span");
+      newBadge.className =
+        "position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger";
+      newBadge.textContent = unreadCount;
+      document.querySelector("#notificationsDropdown").appendChild(newBadge);
+    }
+  } else if (badge) {
+    badge.remove();
+  }
+}

@@ -74,28 +74,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $current_step == 2) {
 
         // Insert ke tabel orders
         $stmt = $conn->prepare("
-            INSERT INTO orders (
-                user_id, 
-                total_harga, 
-                waktu_pengambilan, 
-                status
-            ) VALUES (?, ?, ?, 'Diproses')
+            INSERT INTO orders (user_id, total_harga, waktu_pengambilan, status) 
+            VALUES (?, ?, ?, 'Diproses')
         ");
-
-        if (!$stmt->execute([$_SESSION['user_id'], $total, $waktu_pengambilan])) {
-            throw new Exception("Gagal menyimpan pesanan");
-        }
-
+        $stmt->execute([$_SESSION['user_id'], $total, $waktu_pengambilan]);
         $order_id = $conn->lastInsertId();
 
         // Insert ke tabel order_items
         $stmt = $conn->prepare("
-            INSERT INTO order_items (
-                order_id, 
-                menu_id, 
-                jumlah, 
-                subtotal
-            ) VALUES (?, ?, ?, ?)
+            INSERT INTO order_items (order_id, menu_id, jumlah, subtotal) 
+            VALUES (?, ?, ?, ?)
         ");
 
         foreach ($cart as $item) {
@@ -108,33 +96,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $current_step == 2) {
                 throw new Exception("Stok tidak mencukupi untuk " . $item['nama']);
             }
 
-            // Hitung subtotal
-            $subtotal = $item['harga'] * $item['quantity'];
-
             // Insert item pesanan
-            if (!$stmt->execute([
-                $order_id,
-                $item['menu_id'],
-                $item['quantity'],
-                $subtotal
-            ])) {
-                throw new Exception("Gagal menyimpan item pesanan");
-            }
+            $subtotal = $item['harga'] * $item['quantity'];
+            $stmt->execute([$order_id, $item['menu_id'], $item['quantity'], $subtotal]);
 
             // Update stok
             $update_stmt = $conn->prepare("UPDATE menu SET stok = stok - ? WHERE id = ?");
-            if (!$update_stmt->execute([$item['quantity'], $item['menu_id']])) {
-                throw new Exception("Gagal mengupdate stok");
-            }
+            $update_stmt->execute([$item['quantity'], $item['menu_id']]);
         }
 
         // Commit transaksi
         $conn->commit();
+
+        // Hapus keranjang
         unset($_SESSION['cart']);
 
-        // Redirect langsung ke step 3
+        // Redirect ke step 3 dengan JavaScript
         echo "<script>
-            window.location.href = '/orders/checkout.php?step=3&order_id=" . $order_id . "';
+            window.location.href = 'checkout.php?step=3&order_id=" . $order_id . "';
         </script>";
         exit();
     } catch (Exception $e) {
@@ -235,7 +214,7 @@ $available_dates[$tomorrow] = "Besok (" . date('d/m/Y', strtotime('+1 day')) . "
         </div>
 
     <?php elseif ($current_step == 2): ?>
-        <!-- Step 2: Konfirmasi -->
+        <!-- Step 2: Form Konfirmasi -->
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -244,7 +223,6 @@ $available_dates[$tomorrow] = "Besok (" . date('d/m/Y', strtotime('+1 day')) . "
                     </div>
                     <div class="card-body">
                         <form method="POST" id="checkoutForm">
-                            <!-- Waktu Pengambilan -->
                             <div class="mb-4">
                                 <h5>Waktu Pengambilan</h5>
                                 <div class="row">
@@ -270,12 +248,11 @@ $available_dates[$tomorrow] = "Besok (" . date('d/m/Y', strtotime('+1 day')) . "
                             </div>
 
                             <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" id="btnKonfirmasi">
+                                    <span class="spinner-border spinner-border-sm d-none me-2" role="status"></span>
                                     Konfirmasi Pesanan
                                 </button>
-                                <a href="checkout.php?step=1" class="btn btn-outline-secondary">
-                                    Kembali
-                                </a>
+                                <a href="checkout.php?step=1" class="btn btn-outline-secondary">Kembali</a>
                             </div>
                         </form>
                     </div>
@@ -380,10 +357,13 @@ $available_dates[$tomorrow] = "Besok (" . date('d/m/Y', strtotime('+1 day')) . "
 </div>
 
 <script>
-    document.getElementById('checkoutForm')?.addEventListener('submit', function(e) {
-        const submitButton = this.querySelector('button[type="submit"]');
-        submitButton.disabled = true;
-        submitButton.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Memproses...';
+    document.getElementById('checkoutForm').addEventListener('submit', function(e) {
+        const btn = document.getElementById('btnKonfirmasi');
+        const spinner = btn.querySelector('.spinner-border');
+
+        // Tampilkan loading spinner
+        spinner.classList.remove('d-none');
+        btn.disabled = true;
     });
 </script>
 
