@@ -60,9 +60,44 @@ php -S localhost:8080
 http://localhost:8080
 ```
 
+## 🎯 Penggunaan
+
+### Akun Demo
+
+- Admin:
+  - Username: admin
+  - Password: password
+
+### Panduan Singkat
+
+1. Login menggunakan akun yang sesuai
+2. Mahasiswa dapat:
+   - Melihat menu
+   - Melakukan pemesanan
+   - Melihat status pesanan
+3. Admin dapat:
+   - Mengelola menu
+   - Memproses pesanan
+   - Melihat laporan
+
+## 📸 Screenshot
+
+<table>
+  <tr>bl
+    <td><img src="assets/img/screenshot/Screenshot 2024-12-20 191128.png" alt="Login Page" width="200"/></td>
+    <td><img src="assets/img/screenshot/Screenshot 2024-12-21 023545.png" alt="User Dashboard" width="200"/></td> 
+    <td><img src="assets/img/screenshot/Screenshot 2024-12-21 024405.png" alt="Menu Page" width="200"/></td> 
+    <td><img src="assets/img/screenshot/Screenshot 2024-12-21 023639.png" alt="Admin Dashboard" width="200"/></td>
+  </tr>
+</table>
+
 ## 🤝 Kontribusi
 
 Kami sangat menghargai setiap kontribusi yang diberikan. Jika Anda ingin berkontribusi, silakan buka issue atau pull request.
+
+## 📝 Lisensi
+
+Didistribusikan di bawah Lisensi MIT. Lihat `LICENSE` untuk informasi lebih lanjut.
 
 ## 📞 Kontak
 
@@ -70,4 +105,4 @@ Jika Anda memiliki pertanyaan atau memerlukan bantuan, silakan hubungi kami di [
 
 ---
 
-Terima kasih telah menggunakan Kantin Pintar 😊!
+Terima kasih telah menggunakan Kantin Pintar. 😊

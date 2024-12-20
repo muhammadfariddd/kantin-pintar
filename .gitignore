@@ -26,10 +26,8 @@ ehthumbs.db
 Thumbs.db
 
 # Uploaded files
-/assets/img/menu/*
-!/assets/img/menu/.gitkeep
-/assets/img/users/*
-!/assets/img/users/.gitkeep
+/assets/img/screenshot/*
+!/assets/img/screenshot/.gitkeep
 
 # Logs
 /logs
