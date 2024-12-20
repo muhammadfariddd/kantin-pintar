@@ -1,4 +1,4 @@
-# 🍽️ Kantin Pintar
+![Screenshot 2024-12-21 023639](https://github.com/user-attachments/assets/ae550c37-ba89-4cca-8fc9-a88bdc248a3c)# 🍽️ Kantin Pintar
 
 Kantin Pintar adalah sistem manajemen kantin modern yang memudahkan mahasiswa untuk memesan makanan dan minuman di kampus. Dengan antarmuka yang intuitif dan fitur yang lengkap, Kantin Pintar membuat pengalaman memesan makanan menjadi lebih efisien dan menyenangkan.
 
@@ -83,17 +83,21 @@ http://localhost:8080
 ## 📸 Screenshot
 
 <table>
-  <tr>bl
-    <td><img src="assets/img/screenshot/Screenshot 2024-12-20 191128.png" alt="Login Page" width="200"/></td>
-    <td><img src="assets/img/screenshot/Screenshot 2024-12-21 023545.png" alt="User Dashboard" width="200"/></td> 
-    <td><img src="assets/img/screenshot/Screenshot 2024-12-21 024405.png" alt="Menu Page" width="200"/></td> 
-    <td><img src="assets/img/screenshot/Screenshot 2024-12-21 023639.png" alt="Admin Dashboard" width="200"/></td>
+  <tr>
+    <td><img src="![Screenshot 2024-12-20 191128](https://github.com/user-attachments/assets/4245c9f7-f9a2-479a-9166-348e309312ad)
+" alt="Login Page" width="200"/></td>
+    <td><img src="
+![Screenshot 2024-12-21 023545](https://github.com/user-attachments/assets/24bdcc22-677a-4471-ad6b-fb9b8be8282e)" alt="User Dashboard" width="200"/></td> 
+    <td><img src="![Screenshot 2024-12-21 024405](https://github.com/user-attachments/assets/dc47f7c4-4680-493a-ac94-a00902277c64)" alt="Menu Page" width="200"/></td> 
+    <td><img src="![Screenshot 2024-12-21 023639](https://github.com/user-attachments/assets/20388f4f-bb61-405a-a5ff-aa8d0136a859)
+" alt="Admin Dashboard" width="200"/></td>
   </tr>
 </table>
 
 ## 🤝 Kontribusi
 
 Kami sangat menghargai setiap kontribusi yang diberikan. Jika Anda ingin berkontribusi, silakan buka issue atau pull request.
+
 
 ## 📝 Lisensi
 
