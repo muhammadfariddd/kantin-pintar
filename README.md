@@ -83,7 +83,7 @@ http://localhost:8080
 ## 📸 Screenshot
 
 <table>
-  <tr>bl
+  <tr>
     <td><img src="assets/img/screenshot/Screenshot 2024-12-20 191128.png" alt="Login Page" width="200"/></td>
     <td><img src="assets/img/screenshot/Screenshot 2024-12-21 023545.png" alt="User Dashboard" width="200"/></td> 
     <td><img src="assets/img/screenshot/Screenshot 2024-12-21 024405.png" alt="Menu Page" width="200"/></td> 
