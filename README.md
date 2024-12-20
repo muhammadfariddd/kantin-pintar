@@ -82,14 +82,21 @@ http://localhost:8080
 
 ## 📸 Screenshot
 
-<table>
-  <tr>
-    <td><img src="https://github.com/user-attachments/assets/4245c9f7-f9a2-479a-9166-348e309312ad" alt="Login Page" width="200"/></td>
-    <td><img src="https://github.com/user-attachments/assets/24bdcc22-677a-4471-ad6b-fb9b8be8282e" alt="User Dashboard" width="200"/></td> 
-    <td><img src="https://github.com/user-attachments/assets/dc47f7c4-4680-493a-ac94-a00902277c64" alt="Menu Page" width="200"/></td> 
-    <td><img src="https://github.com/user-attachments/assets/20388f4f-bb61-405a-a5ff-aa8d0136a859" alt="Admin Dashboard" width="200"/></td>
-  </tr>
-</table>
+### Login Page
+
+![Login Page](https://github.com/user-attachments/assets/4245c9f7-f9a2-479a-9166-348e309312ad)
+
+### User Dashboard
+
+![User Dashboard](https://github.com/user-attachments/assets/24bdcc22-677a-4471-ad6b-fb9b8be8282e)
+
+### Menu Page
+
+![Menu Page](https://github.com/user-attachments/assets/dc47f7c4-4680-493a-ac94-a00902277c64)
+
+### Admin Dashboard
+
+![Admin Dashboard](https://github.com/user-attachments/assets/20388f4f-bb61-405a-a5ff-aa8d0136a859)
 
 ## 🤝 Kontribusi
 
