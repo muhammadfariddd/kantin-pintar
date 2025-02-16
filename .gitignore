@@ -7,9 +7,6 @@
 .env.local
 .env.*.local
 
-# Config files with sensitive data
-/config/database.php
-
 # IDE specific files
 .idea/
 .vscode/

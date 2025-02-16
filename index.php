@@ -1,19 +1,16 @@
 <?php
 session_start();
 
-// Jika belum login, redirect ke login
 if (!isset($_SESSION['user_id'])) {
     header("Location: /auth/login.php");
     exit();
 }
 
-// Jika admin, redirect ke admin panel
 if ($_SESSION['user_role'] === 'admin') {
     header("Location: /admin/index.php");
     exit();
 }
 
-// Jika user biasa, tampilkan halaman utama
 require_once 'config/database.php';
 
 // Ambil menu populer
